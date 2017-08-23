@@ -4,6 +4,8 @@ const test = require('tap');
 
 const jstp = require('../..');
 
+//const sessionSerde = require('../fixtures/session-serde.js');
+
 const app = require('../fixtures/application');
 const application = new jstp.Application(app.name, app.interfaces);
 
