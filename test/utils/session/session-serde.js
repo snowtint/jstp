@@ -1,8 +1,8 @@
 'use strict';
 
-const jstp = require('../..');
+const jstp = require('../../..');
 
-function stringifySession(session) {
+function serialize(session) {
   if (!(session instanceof jstp.Session)) {
     throw new TypeError('session is expected to be a jstp.Session object');
   }
@@ -12,14 +12,13 @@ function stringifySession(session) {
   return JSON.stringify(copy);
 }
 
-function parseSession(sessionString) {
-  const sessionCopy = JSON.parse(sessionString);
-  sessionCopy.buffer = new Map(sessionCopy.buffer);
-  return Object.assign(new jstp.Session(), sessionCopy);
+function deserialize(string) {
+  const session = JSON.parse(string);
+  session.buffer = new Map(session.buffer);
+  return Object.assign(new jstp.Session(), session);
 }
 
-
 module.exports = {
-  stringifySession,
-  parseSession,
+  serialize,
+  deserialize,
 };
