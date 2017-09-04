@@ -12,8 +12,8 @@ function serialize(session) {
   return JSON.stringify(copy);
 }
 
-function deserialize(string) {
-  const session = JSON.parse(string);
+function deserialize(serializedSession) {
+  const session = JSON.parse(serializedSession);
   session.buffer = new Map(session.buffer);
   return Object.assign(new jstp.Session(), session);
 }

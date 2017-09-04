@@ -40,11 +40,7 @@ server.listen(0, () => {
 });
 
 function getClient() {
-  return cp.fork(
-    path.join(__dirname, '../utils/session/client'),
-    [],
-    { stdin: 'inherit', stdout: 'inherit', stderr: 'inherit' }
-  );
+  return cp.fork(path.join(__dirname, '../utils/session/client'));
 }
 
 function session(serializedSession) {
@@ -54,6 +50,7 @@ function session(serializedSession) {
   client.on('message', ([message, ...args]) => {
     switch (message) {
       case 'error':
+        console.log(args[0].message);
         test.fail('must not encounter an error');
         break;
       case 'event':
